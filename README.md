@@ -1,73 +1,51 @@
-# Minimal Template
+# Media Tracker App
 
-This is a [React Native](https://reactnative.dev/) project built with [Expo](https://expo.dev/) and [React Native Reusables](https://reactnativereusables.com).
+Modern media-tracking experience for anime, manga, TV, movies, novels, and more. Built with Expo Router, NativeWind/Tailwind, React Native Reusables, SQLite, and Drizzle ORM.
 
-It was initialized using the following command:
+## ✨ Highlights
 
-```bash
-npx @react-native-reusables/cli@latest init -t my-app
-```
+- Full seven-screen UX (Home, Library, Search & Discovery, Add/Edit Entry, Detail, Profile/Stats, Settings) wired via a bottom tab navigator + nested stacks.
+- Shared component library (cards, chips, section headers, charts, loaders, forms) for consistent UI patterns.
+- Local-first persistence using Expo SQLite + Drizzle ORM with optimistic mutations through a `MediaProvider` context.
+- Tailwind-only styling with strict reuse of RN Reusables primitives (no custom CSS files).
+- Built-in mock data (`lib/data/mock.ts`) for offline demos plus seeding on first launch.
 
-## Getting Started
+## 🗂️ Key folders
 
-To run the development server:
+| Path | Purpose |
+| --- | --- |
+| `app/` | Expo Router routes for tabs, detail stack, and settings. |
+| `components/` | Shared UI primitives (cards, chips, charts, forms, etc.). |
+| `providers/media-provider.tsx` | Context for queries, stats, filters, and optimistic mutations. |
+| `lib/db/` | SQLite schema + Drizzle helpers + seed utilities. |
+| `lib/types/` | Strongly typed domain models (media, stats, filters). |
+| `docs/architecture.md` | High-level implementation strategy and navigation map. |
 
-```bash
-    npm run dev
-    # or
-    yarn dev
-    # or
-    pnpm dev
-    # or
-    bun dev
-```
-
-This will start the Expo Dev Server. Open the app in:
-
-- **iOS**: press `i` to launch in the iOS simulator _(Mac only)_
-- **Android**: press `a` to launch in the Android emulator
-- **Web**: press `w` to run in a browser
-
-You can also scan the QR code using the [Expo Go](https://expo.dev/go) app on your device. This project fully supports running in Expo Go for quick testing on physical devices.
-
-## Adding components
-
-You can add more reusable components using the CLI:
+## 🚀 Run locally
 
 ```bash
-npx react-native-reusables/cli@latest add [...components]
+pnpm install
+pnpm dev
 ```
 
-> e.g. `npx react-native-reusables/cli@latest add input textarea`
+The command boots Expo Dev Server. Use on-screen prompts to open iOS (`i`), Android (`a`), or Web (`w`). You can also scan the QR code with Expo Go on a physical device.
 
-If you don't specify any component names, you'll be prompted to select which components to add interactively. Use the `--all` flag to install all available components at once.
+## 🧰 Tooling & scripts
 
-## Project Features
+- `pnpm dev` – start Expo (clears cache for reliable NativeWind class recompiles).
+- `pnpm android | ios | web` – platform-specific simulators.
+- `pnpm clean` – reset `.expo` + `node_modules`.
 
-- ⚛️ Built with [Expo Router](https://expo.dev/router)
-- 🎨 Styled with [Tailwind CSS](https://tailwindcss.com/) via [Nativewind](https://www.nativewind.dev/)
-- 📦 UI powered by [React Native Reusables](https://github.com/founded-labs/react-native-reusables)
-- 🚀 New Architecture enabled
-- 🔥 Edge to Edge enabled
-- 📱 Runs on iOS, Android, and Web
+## 🧱 Data flow quick reference
 
-## Learn More
+1. `providers/MediaProvider` runs SQLite migrations via `lib/db/index.ts`, seeds demo data, and exposes `entries`, `stats`, and helper mutations (`incrementProgress`, `toggleFavorite`, `saveEntry`, `updateStatus`).
+2. Screens subscribe with the `useMedia()` hook to display lists, stats, and charts while receiving optimistic updates.
+3. Shared cards/form controls live under `components/cards|shared|forms` and rely exclusively on RN Reusables + Tailwind utility classes.
 
-To dive deeper into the technologies used:
+## 📦 Deployment
 
-- [React Native Docs](https://reactnative.dev/docs/getting-started)
-- [Expo Docs](https://docs.expo.dev/)
-- [Nativewind Docs](https://www.nativewind.dev/)
-- [React Native Reusables](https://reactnativereusables.com)
-
-## Deploy with EAS
-
-The easiest way to deploy your app is with [Expo Application Services (EAS)](https://expo.dev/eas).
-
-- [EAS Build](https://docs.expo.dev/build/introduction/)
-- [EAS Updates](https://docs.expo.dev/eas-update/introduction/)
-- [EAS Submit](https://docs.expo.dev/submit/introduction/)
+This project works with Expo Go for rapid testing. When you're ready to ship, follow the [EAS Build](https://docs.expo.dev/build/introduction/), [EAS Update](https://docs.expo.dev/eas-update/introduction/), and [EAS Submit](https://docs.expo.dev/submit/introduction/) guides.
 
 ---
 
-If you enjoy using React Native Reusables, please consider giving it a ⭐ on [GitHub](https://github.com/founded-labs/react-native-reusables). Your support means a lot!
+Questions or ideas? Check `docs/architecture.md` for the full UI/UX specification summary and future enhancement notes.
