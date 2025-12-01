@@ -9,25 +9,29 @@
       "distribution": "internal",
       "android": {
         "buildType": "apk"
-      }
+      },
+      "channel": "development"
     },
     "preview": {
       "distribution": "internal",
       "android": {
         "buildType": "apk"
-      }
+      },
+      "channel": "preview"
     },
     "production": {
       "autoIncrement": true,
       "android": {
         "buildType": "apk"
-      }
+      },
+      "channel": "production"
     },
     "production-aab": {
       "autoIncrement": true,
       "android": {
-        "buildType": "aab"
-      }
+        "buildType": "app-bundle"
+      },
+      "channel": "production"
     }
   },
   "submit": {
@@ -36,17 +40,6 @@
         "serviceAccountKeyPath": "./google-service-account.json",
         "track": "internal"
       }
-    }
-  },
-  "update": {
-    "development": {
-      "channel": "development"
-    },
-    "preview": {
-      "channel": "preview"
-    },
-    "production": {
-      "channel": "production"
     }
   }
 }

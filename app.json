@@ -1,17 +1,17 @@
 {
   "expo": {
-    "name": "Media Tracker",
-    "slug": "media-tracker",
+    "name": "BingeTrack",
+    "slug": "bingetrack",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "my-app",
+    "scheme": "bingetrack",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#8B5CF6"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -24,10 +24,9 @@
       "edgeToEdgeEnabled": true,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#8B5CF6"
       },
-      "package": "com.praveen.mediatracker",
-      "versionCode": 1,
+      "package": "com.silversoul.bingetrack",
       "permissions": []
     },
     "web": {
@@ -55,8 +54,9 @@
         "origin": false
       },
       "eas": {
-        "projectId": "YOUR_PROJECT_ID"
+        "projectId": "1ca5ab1f-5aea-40e6-8f1b-43af99a11c85"
       }
-    }
+    },
+    "owner": "randomusername007"
   }
 }
