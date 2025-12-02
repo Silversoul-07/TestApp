@@ -297,7 +297,11 @@ function Header({ viewMode, onChangeViewMode }: HeaderProps) {
     <View className="mb-4">
       <View className="flex-row items-center justify-between">
         <Link href="/calendar" asChild>
-          <Button size="icon" className="rounded-full">
+          <Button 
+          variant="ghost"
+          size="icon"
+          className="rounded-full"
+          >
             <Icon as={CalendarIcon} size={20} />
           </Button>
         </Link>

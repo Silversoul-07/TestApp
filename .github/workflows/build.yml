@@ -1,0 +1,155 @@
+# Workflow Name: Test Builds
+# Change branch name below as per your own use case.
+
+on:
+  push:
+    branches: [ test ]    # Replace 'test' with your testing branch if needed
+  workflow_dispatch:
+
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        # ✅ Checkout your code from GitHub
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 10.23.0
+        # ✅ Setup pnpm package manager
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+        # ✅ Setup Node.js environment (version 22) with pnpm cache
+
+      - run: pnpm install --frozen-lockfile
+        # ✅ Install project dependencies
+
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+        # ✅ Setup Java environment for Gradle build
+
+      - name: Install Android SDK packages
+        env:
+          ANDROID_SDK_ROOT: ${{ runner.temp }}/android-sdk
+        run: |
+          set -euxo pipefail
+          mkdir -p "$ANDROID_SDK_ROOT/cmdline-tools"
+          curl -fsSL https://dl.google.com/android/repository/commandlinetools-linux-13114758_latest.zip -o /tmp/cmdline-tools.zip
+          unzip -q /tmp/cmdline-tools.zip -d "$ANDROID_SDK_ROOT/cmdline-tools"
+          mv "$ANDROID_SDK_ROOT/cmdline-tools/cmdline-tools" "$ANDROID_SDK_ROOT/cmdline-tools/latest"
+          yes | "$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager" --sdk_root="$ANDROID_SDK_ROOT" --licenses >/dev/null || true
+          "$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager" --sdk_root="$ANDROID_SDK_ROOT" \
+            "platform-tools" \
+            "platforms;android-36" \
+            "build-tools;36.0.0" \
+            "ndk;27.1.12297006"
+          echo "ANDROID_HOME=$ANDROID_SDK_ROOT" >> "$GITHUB_ENV"
+          echo "ANDROID_SDK_ROOT=$ANDROID_SDK_ROOT" >> "$GITHUB_ENV"
+        # ✅ Install SDK bits required by Expo/React Native build (API/Build tools 36)
+
+      - name: Configure SDK location for Gradle
+        env:
+          ANDROID_SDK_ROOT: ${{ runner.temp }}/android-sdk
+        run: echo "sdk.dir=$ANDROID_SDK_ROOT" > android/local.properties
+        # ✅ Point local.properties at the installed SDK so Gradle finds it
+
+      - name: Cache Gradle wrapper & dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/wrapper
+            ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+        # ✅ Cache Gradle to speed up future builds
+
+      - name: Make Gradle wrapper executable
+        run: chmod +x ./android/gradlew
+        # ✅ Ensure Gradle wrapper has executable permissions
+
+      - name: Clean Android build
+        run: |
+          cd android
+          ./gradlew clean
+        # ✅ Clean previous Android build outputs
+
+      - name: Build Android APK (release)
+        run: |
+          cd android
+          ./gradlew assembleRelease
+        # ✅ Build Android APK (release) for testing builds
+
+      # - name: Build Android Production Bundle (AAB)
+      #   run: |
+      #     cd android
+      #     ./gradlew bundleRelease
+      #   # 🔒 Uncomment above if you also want test AAB build alongside APK
+
+      - name: Upload Android APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release.apk
+          path: android/app/build/outputs/apk/release/app-release.apk
+          retention-days: 7
+        # ✅ Uploads the generated APK as an artifact to GitHub for download or test distribution
+
+      # ✅ ✅ COMMIT NOTE:
+      # This job builds Android APK for testing.
+      # Replace 'test' with your testing branch if different.
+
+  # build-ios:
+  #   runs-on: macos-latest
+
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #       # ✅ Checkout your code from GitHub
+
+  #     - uses: actions/setup-node@v3
+  #       with:
+  #         node-version: '18'
+  #       # ✅ Setup Node.js environment (version 18)
+
+  #     - name: Install dependencies
+  #       run: npm install
+  #       # ✅ Install project dependencies
+
+  #     - name: List available Xcode versions
+  #       run: ls /Applications | grep Xcode
+  #       # ✅ List available Xcode versions for visibility
+
+  #     - name: Select Xcode version
+  #       run: sudo xcode-select -s /Applications/Xcode_15.2.app
+  #       # ✅ Select required Xcode version for build
+
+  #     - name: Install CocoaPods
+  #       run: |
+  #         cd ios
+  #         pod install
+  #       # ✅ Install iOS dependencies via CocoaPods
+
+  #     - name: Install Fastlane
+  #       run: sudo gem install fastlane
+  #       # ✅ Install Fastlane for TestFlight or App Store deployment
+
+  #     - name: Build & Upload iOS Test build to TestFlight
+  #       run: |
+  #         cd ios
+  #         fastlane release
+  #       env:
+  #         APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+  #         APP_STORE_CONNECT_API_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_ISSUER_ID }}
+  #         APP_STORE_CONNECT_API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY }}
+  #         MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+  #       # ✅ Builds iOS test app and uploads to TestFlight via Fastlane
+  #       # 🔒 Ensure all secrets are configured in GitHub Actions Secrets
+
+  #     # ✅ ✅ COMMIT NOTE:
+  #     # This job builds iOS test app and uploads to TestFlight.
+  #     # Replace 'test' with your testing branch if different.

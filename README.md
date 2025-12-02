@@ -28,6 +28,8 @@ pnpm install
 pnpm dev
 ```
 
+> ℹ️ The repo pins `pnpm@10.23.0` via `packageManager`; run `corepack enable` (Node 16.13+) if you haven't used pnpm before so CI and local installs stay in sync.
+
 The command boots Expo Dev Server. Use on-screen prompts to open iOS (`i`), Android (`a`), or Web (`w`). You can also scan the QR code with Expo Go on a physical device.
 
 ## 🧰 Tooling & scripts

@@ -10,7 +10,6 @@ import { Icon } from '@/components/ui/icon';
 import { useMedia } from '@/hooks/use-media';
 import type { DistributionDatum, GenreDistribution } from '@/lib/types/media';
 import { 
-  AwardIcon, 
   TrendingUpIcon, 
   HeartIcon, 
   ClockIcon,
@@ -140,7 +139,7 @@ export default function ProfileScreen() {
             </View>
             <Link href="/settings" asChild>
               <Button variant="ghost" size="icon" className="rounded-full">
-                <Icon as={BarChart3Icon} size={20} />
+                <Icon as={SettingsIcon} size={20} />
               </Button>
             </Link>
           </View>
