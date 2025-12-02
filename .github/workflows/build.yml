@@ -3,8 +3,8 @@
 
 on:
   push:
-    branches: [ test ]    # Replace 'test' with your testing branch if needed
-  workflow_dispatch:
+    branches: [ main ]    # Runs automatically on pushes to main
+  workflow_dispatch:      # Allows manual runs from the Actions tab
 
 jobs:
   build-android:
