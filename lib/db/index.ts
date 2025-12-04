@@ -73,20 +73,6 @@ export async function initializeDatabase() {
   isInitialized = true;
 }
 
-export async function seedMediaEntries(seed: MediaEntry[]) {
-  const countResult = await db
-    .select({ count: sql<number>`count(*)`.as('count') })
-    .from(mediaEntries)
-    .get();
-  if ((countResult?.count ?? 0) > 0) {
-    return;
-  }
-
-  for (const entry of seed) {
-    await db.insert(mediaEntries).values(mapEntryToRow(entry)).run();
-  }
-}
-
 export function mapEntryToRow(entry: MediaEntry): MediaEntryRow {
   return {
     id: entry.id,

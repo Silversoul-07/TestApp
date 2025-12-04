@@ -1,11 +1,9 @@
 import React from 'react';
 
-import { MEDIA_SEED } from '@/lib/data/mock';
 import {
   fetchMediaEntries,
   incrementProgress as incrementProgressDb,
   initializeDatabase,
-  seedMediaEntries,
   upsertMediaEntry,
 } from '@/lib/db';
 import type {
@@ -43,7 +41,6 @@ export function MediaProvider({ children }: React.PropsWithChildren) {
     setLoading(true);
     try {
       await initializeDatabase();
-      await seedMediaEntries(MEDIA_SEED);
       const data = await fetchMediaEntries();
       setEntries(data);
     } catch (error) {
