@@ -1,3 +1,11 @@
+// TODO: Transition UI improvements:
+// - Add smooth page transitions with React Navigation animations
+// - Implement shared element transitions for media cards
+// - Add fade/slide animations between screens
+// - Improve modal presentation animations
+// - Add gesture-based navigation with spring physics
+// - Consider using Reanimated for performance-optimized transitions
+
 import '@/global.css';
 
 import { NAV_THEME } from '@/lib/theme';

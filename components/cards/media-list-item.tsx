@@ -1,3 +1,12 @@
+// TODO: Media List Item UI improvements:
+// - Add swipe gestures for quick actions (delete, favorite, increment)
+// - Implement smooth animations for progress updates
+// - Add thumbnail loading placeholders
+// - Improve spacing and visual hierarchy
+// - Add long-press context menu
+// - Implement reordering with drag handles
+// - Add better visual feedback for interactions
+
 import { Button } from '@/components/ui/button';
 import { Icon } from '@/components/ui/icon';
 import { Progress } from '@/components/ui/progress';

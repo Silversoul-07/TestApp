@@ -1,3 +1,12 @@
+// TODO: Calendar feature enhancements:
+// - Swap to display all entries in daily view instead of filtered by date
+// - Add support for future date entries (allow scheduling future watching/reading)
+// - Implement reminder system with notification support
+// - Add option to set and manage reminders for entries
+// - Consider adding week view and month view options
+// - Add entry completion predictions based on progress
+// - Integrate with device calendar for external reminders
+
 import { MediaListItem } from '@/components/cards/media-list-item';
 import { LoadingState } from '@/components/shared/loading-state';
 import { EmptyState } from '@/components/shared/empty-state';
