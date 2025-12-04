@@ -41,11 +41,7 @@ export const SORT_OPTIONS: FilterOption<LibrarySortOption>[] = [
   { label: 'Date Added', value: 'dateAdded' },
 ];
 
-export const STAT_CARD_DEFINITIONS: StatCardDefinition[] = [
-  { key: 'inProgress', label: 'Currently Watching/Reading', icon: FilmIcon },
-  { key: 'completed', label: 'Completed', icon: ListChecksIcon },
-  { key: 'total', label: 'Total Entries', icon: LibraryIcon },
-];
+// Removed: STAT_CARD_DEFINITIONS - unused export
 
 export const TRENDING_TABS: FilterOption<'anime' | 'manga' | 'tv' | 'movie'>[] = [
   { label: 'Anime', value: 'anime' },
@@ -54,17 +50,4 @@ export const TRENDING_TABS: FilterOption<'anime' | 'manga' | 'tv' | 'movie'>[] =
   { label: 'Movies', value: 'movie' },
 ];
 
-export const SECTION_ACTIONS = {
-  viewAll: 'View All',
-};
-
-export const DASHBOARD_ACTIONS = [
-  {
-    icon: TrendingUpIcon,
-    label: 'Trending',
-  },
-  {
-    icon: StarIcon,
-    label: 'Favorites',
-  },
-];
+// Removed: SECTION_ACTIONS and DASHBOARD_ACTIONS - unused exports
