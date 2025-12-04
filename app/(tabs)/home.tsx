@@ -155,7 +155,7 @@ export default function HomeScreen() {
             />
           </View>
           <Button
-            variant={showFilters ? 'default' : 'outline'}
+            variant={showFilters ? 'default' : 'ghost'}
             size="icon"
             className="rounded-full"
             onPress={() => setShowFilters(!showFilters)}>

@@ -3,11 +3,13 @@ import { Button } from '@/components/ui/button';
 import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useAppUpdates } from '@/hooks/use-app-updates';
-import { ArrowUpRightIcon, DatabaseIcon, PaletteIcon, SettingsIcon, RefreshCwIcon, CheckCircle2Icon } from 'lucide-react-native';
+import { clearAllData } from '@/lib/db';
+import { ArrowUpRightIcon, DatabaseIcon, PaletteIcon, SettingsIcon, RefreshCwIcon, CheckCircle2Icon, TrashIcon } from 'lucide-react-native';
 import type { LucideIcon } from 'lucide-react-native';
 import React from 'react';
-import { ScrollView, View, ActivityIndicator } from 'react-native';
+import { ScrollView, View, ActivityIndicator, Alert } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as Updates from 'expo-updates';
 import Constants from 'expo-constants';
@@ -17,6 +19,22 @@ export default function SettingsScreen() {
   const { isChecking, isUpdateAvailable, checkForUpdates } = useAppUpdates();
   const appVersion = Constants.expoConfig?.version || '1.0.0';
   const updateId = Updates.updateId || 'Development';
+  const [showClearDialog, setShowClearDialog] = React.useState(false);
+  const [isClearing, setIsClearing] = React.useState(false);
+
+  const handleClearData = async () => {
+    try {
+      setIsClearing(true);
+      await clearAllData();
+      setShowClearDialog(false);
+      Alert.alert('Success', 'All data has been cleared successfully.');
+    } catch (error) {
+      Alert.alert('Error', 'Failed to clear data. Please try again.');
+      console.error('Error clearing data:', error);
+    } finally {
+      setIsClearing(false);
+    }
+  };
   
   return (
     <View className="flex-1 bg-background" style={{ paddingTop: insets.top }}>
@@ -85,8 +103,16 @@ export default function SettingsScreen() {
                 <Button className="mb-3">
                   <Text>Backup</Text>
                 </Button>
-                <Button variant="outline">
+                <Button variant="outline" className="mb-3">
                   <Text>Clear Cache</Text>
+                </Button>
+                <Button 
+                  variant="destructive" 
+                  onPress={() => setShowClearDialog(true)}
+                  className="flex-row items-center gap-2"
+                >
+                  <Icon as={TrashIcon} size={18} />
+                  <Text>Clear All Data</Text>
                 </Button>
               </AccordionContent>
             </AccordionItem>
@@ -97,6 +123,39 @@ export default function SettingsScreen() {
           </Button>
         </View>
       </ScrollView>
+
+      <Dialog open={showClearDialog} onOpenChange={setShowClearDialog}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Clear All Data?</DialogTitle>
+            <DialogDescription>
+              This will permanently delete all your media entries, progress, and activity logs. This action cannot be undone.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button 
+              variant="outline" 
+              onPress={() => setShowClearDialog(false)}
+              disabled={isClearing}
+            >
+              <Text>Cancel</Text>
+            </Button>
+            <Button 
+              variant="destructive" 
+              onPress={handleClearData}
+              disabled={isClearing}
+              className="flex-row items-center gap-2"
+            >
+              {isClearing ? (
+                <ActivityIndicator size="small" color="white" />
+              ) : (
+                <Icon as={TrashIcon} size={18} />
+              )}
+              <Text>{isClearing ? 'Clearing...' : 'Clear Data'}</Text>
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </View>
   );
 }

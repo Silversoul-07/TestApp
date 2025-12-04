@@ -184,3 +184,9 @@ export async function fetchMediaEntries() {
   const rows = await db.select().from(mediaEntries).all();
   return rows.map(mapRowToEntry);
 }
+
+export async function clearAllData() {
+  await db.delete(activityLogs).run();
+  await db.delete(mediaEntries).run();
+  // Note: milestones are kept as they represent achievements
+}
