@@ -37,10 +37,20 @@ export function MediaCard({
     if (!entry.totalUnits) return 0;
     return Math.round(((entry.progressUnits ?? 0) / entry.totalUnits) * 100);
   }, [entry]);
-  const mediaLabel = React.useMemo(
-    () => entry.mediaType.replace('-', ' ').toUpperCase(),
-    [entry.mediaType]
-  );
+  const mediaLabel = React.useMemo(() => {
+    let label = '';
+    if (typeof entry.mediaType === 'string') {
+      label = entry.mediaType;
+    } else if (
+      entry.mediaType &&
+      typeof entry.mediaType === 'object' &&
+      'value' in entry.mediaType &&
+      typeof (entry.mediaType as any).value === 'string'
+    ) {
+      label = (entry.mediaType as { value: string }).value;
+    }
+    return label.replace('-', ' ').toUpperCase();
+  }, [entry.mediaType]);
 
   return (
     <AnimatedPressable

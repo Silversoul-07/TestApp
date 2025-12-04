@@ -96,7 +96,7 @@ export default function AddEntryScreen() {
     };
 
     await saveEntry(newEntry);
-    router.push('/(tabs)/library');
+    router.push('/(tabs)/home');
   };
 
   return (
@@ -107,7 +107,7 @@ export default function AddEntryScreen() {
           <View className="mb-6 flex-row items-center justify-between">
             <View className="w-10" />
             <View className="flex-1 items-center">
-              <Text className="text-xl font-bold">Add Entry</Text>
+              <Text className="text-lg font-bold">Add Entry</Text>
             </View>
             <Button 
               variant="ghost" 
