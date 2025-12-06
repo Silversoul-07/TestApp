@@ -1,3 +1,12 @@
+// TODO: Explore different rating methods:
+// - Add tier-based rating system (S, A, B, C, D tiers)
+// - Implement emoji-based rating (😍, 😊, 😐, 😞, 😡)
+// - Add percentage-based rating (0-100%)
+// - Allow custom rating scales (5-point, 10-point, tier)
+// - Add rating categories (story, art, characters, music, etc.)
+// - Implement weighted average for multi-category ratings
+// - Add user preference for default rating system in settings
+
 import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
 import { StarIcon } from 'lucide-react-native';

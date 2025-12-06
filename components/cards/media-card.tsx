@@ -1,3 +1,13 @@
+// TODO: Media Card UI improvements:
+// - Add gradient overlay on images for better text readability
+// - Implement skeleton loading states
+// - Add hover/press animations with scale transform
+// - Improve card shadows and borders
+// - Add quick action menu overlay
+// - Implement card variants (compact, detailed, minimal)
+// - Add progress ring around cover image
+// - Improve badge positioning and styling
+
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Icon } from '@/components/ui/icon';

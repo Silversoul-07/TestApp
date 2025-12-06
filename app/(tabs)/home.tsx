@@ -1,3 +1,11 @@
+// TODO: Home page UI improvements needed:
+// - Redesign card layout for better visual appeal and information hierarchy
+// - Improve list style with better spacing and visual contrast
+// - Enhance filter options UI with better organization and accessibility
+// - Add smooth transitions between grid and list view modes
+// - Consider adding quick actions overlay on cards
+// - Improve mobile responsiveness and touch targets
+
 import { MediaCard } from '@/components/cards/media-card';
 import { MediaListItem } from '@/components/cards/media-list-item';
 import { EmptyState } from '@/components/shared/empty-state';

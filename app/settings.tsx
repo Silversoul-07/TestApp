@@ -1,3 +1,15 @@
+// TODO: Settings improvements:
+// - Add theme customization options (light/dark/auto, accent colors)
+// - Implement cloud backup to Supabase (auto-sync, manual backup/restore)
+// - Add GitHub version checker with in-app update notifications
+// - Add export to JSON/CSV functionality
+// - Add import from JSON/CSV functionality
+// - Add data sync status indicator
+// - Implement account management (if using auth)
+// - Add notification preferences
+// - Add language/localization options
+// - Add privacy settings
+
 import { FormSwitch } from '@/components/forms/form-switch';
 import { Button } from '@/components/ui/button';
 import { Icon } from '@/components/ui/icon';

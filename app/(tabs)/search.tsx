@@ -1,3 +1,21 @@
+// TODO: Discover page complete makeover:
+// Backend improvements:
+// - Setup serverless backend (Supabase Edge Functions) for recommendations
+// - Implement AI-powered personalized recommendations based on watch history
+// - Add external API integration (TMDB, AniList, etc.) for search and metadata
+// - Create recommendation algorithm using genre preferences and ratings
+// - Add caching layer for API responses to reduce costs
+// 
+// UI improvements:
+// - Complete redesign with modern card-based layout
+// - Add infinite scroll for search results
+// - Implement advanced filters (genre, year, rating, etc.)
+// - Add trending section with real-time data
+// - Allow users to create and share custom public lists
+// - Add "Discover" feed with curated collections
+// - Improve search autocomplete and suggestions
+// - Add preview cards with quick actions (add to list, view details)
+
 import { MediaCard } from '@/components/cards/media-card';
 import { EmptyState } from '@/components/shared/empty-state';
 import { FilterChip } from '@/components/shared/filter-chip';

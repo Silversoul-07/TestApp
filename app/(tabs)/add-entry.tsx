@@ -1,3 +1,20 @@
+// TODO: Add Entry improvements:
+// UI enhancements:
+// - Redesign form with step-by-step wizard interface
+// - Add visual feedback for form validation
+// - Improve layout with better spacing and typography
+// - Add image picker for custom cover images
+// - Add quick templates for common media types
+// - Implement auto-save to prevent data loss
+// 
+// Form improvements:
+// - Add search integration to auto-fill metadata from APIs
+// - Add genre multi-select with suggestions
+// - Add voice input for title and notes
+// - Implement smart defaults based on media type
+// - Add bulk import functionality
+// - Add duplicate detection before saving
+
 import { MediaCard } from '@/components/cards/media-card';
 import { FormDatePicker } from '@/components/forms/form-date-picker';
 import { FormDropdown } from '@/components/forms/form-dropdown';
