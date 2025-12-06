@@ -130,7 +130,7 @@ export default function AddEntryScreen() {
               variant="ghost" 
               size="icon" 
               className="rounded-full"
-              onPress={() => router.back()}
+              onPress={() => router.push('/(tabs)/search')}
             >
               <Icon as={XIcon} size={20} />
             </Button>

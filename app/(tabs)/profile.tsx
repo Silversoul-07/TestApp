@@ -156,7 +156,7 @@ export default function ProfileScreen() {
             <View className="flex-1 items-center">
               <Text className="text-xl font-bold">Profile</Text>
             </View>
-            <Link href="/settings" asChild>
+            <Link href="/(tabs)/settings" asChild>
               <Button variant="ghost" size="icon" className="rounded-full">
                 <Icon as={SettingsIcon} size={20} />
               </Button>

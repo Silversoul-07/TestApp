@@ -28,11 +28,28 @@ export default function RootLayout() {
     <ThemeProvider value={NAV_THEME[colorScheme ?? 'light']}>
       <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
       <MediaProvider>
-        <Stack screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="(tabs)" />
-          <Stack.Screen name="media/[id]" options={{ presentation: 'card', headerShown: true }} />
-          <Stack.Screen name="calendar" options={{ presentation: 'card', headerShown: false }} />
-          <Stack.Screen name="settings" options={{ presentation: 'card', headerShown: true, title: 'Settings' }} />
+        <Stack 
+          screenOptions={{ 
+            headerShown: false,
+            gestureEnabled: true,
+            contentStyle: {
+              backgroundColor: NAV_THEME[colorScheme ?? 'light'].colors.background,
+            },
+          }}>
+          <Stack.Screen 
+            name="(tabs)" 
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen 
+            name="media/[id]" 
+            options={{ 
+              presentation: 'card',
+              headerShown: true,
+              gestureEnabled: true,
+            }} 
+          />
         </Stack>
         <PortalHost />
       </MediaProvider>

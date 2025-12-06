@@ -304,7 +304,7 @@ function Header({ viewMode, onChangeViewMode }: HeaderProps) {
   return (
     <View className="mb-4">
       <View className="flex-row items-center justify-between">
-        <Link href="/calendar" asChild>
+        <Link href="/(tabs)/calendar" asChild>
           <Button 
           variant="ghost"
           size="icon"
