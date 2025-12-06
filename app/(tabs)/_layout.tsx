@@ -19,6 +19,7 @@ const TAB_OPTIONS = {
     height: 64,
   },
   headerShown: false,
+  animation: 'shift' as const,
 };
 
 export default function TabsLayout() {
@@ -62,6 +63,18 @@ export default function TabsLayout() {
       />
       <Tabs.Screen
         name="add-entry"
+        options={{
+          href: null,
+        }}
+      />
+      <Tabs.Screen
+        name="calendar"
+        options={{
+          href: null,
+        }}
+      />
+      <Tabs.Screen
+        name="settings"
         options={{
           href: null,
         }}
